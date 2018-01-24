@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<!-- 使用无参构造器创建对象 -->
+	<!-- 
+		id:bean的名字，要求唯一。
+		class: 完整的类名（包括包名）
+	 -->
+	<bean id="stu1" class="first.Student"/>
+	<bean id="date1" class="java.util.Date"/>
+	
+	<!-- 使用静态工厂方法创建对象 -->
+	<!-- 
+		factory-method:指定一个静态方法。
+		容器会调用该类的静态方法来创建一个对象。
+	 -->
+	<bean id="cal1" class="java.util.Calendar" factory-method="getInstance"/>
+	
+	<!-- 使用实例工厂方法创建对象 -->
+	<!-- 
+		factory-bean:指定一个bean的id,容器
+		会调用该bean的实例方法来创建一个对象。
+	 -->
+	<bean id="time1" factory-bean="cal1" factory-method="getTime"/>
+
+</beans>
