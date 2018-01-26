@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<bean id="paperCurrency" class="ioc.byautowire.PaperCurrency"/>
+	<bean id="coin" class="ioc.byautowire.Coin"/>
+
+	<!--
+    autowire:表示让容器自动建立对象之间的依赖关系。
+    byName:依据属性名查找对应的bean(就是以属性名作为bean的id来查找)，
+    找到之后，调用set方法来建立依赖关系。
+    注：如果找不到，则不注入。
+    byType:依据属性类型来查找对应的bean ,找到之后，调用set方法来建立依赖关系。
+    注：如果找到多个，则会出错。
+    constructor:与byType类似，只不过，调用构造器来注入。
+ 	-->
+
+	<bean id="wallet" class="ioc.byautowire.Wallet" autowire="byName"/>
+</beans>

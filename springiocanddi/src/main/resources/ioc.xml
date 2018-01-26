@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<!-- set方法注入 -->
+	<bean id="drop" class="ioc.byset.Drop"/>
+	<bean id="milk" class="ioc.byset.Milk"/>
+	<!--<bean id="c1" class="ioc.C"/>-->
+	<!-- 
+		property:让容器调用set方法来建立依赖关系。
+		其中,name属性指定属性名，ref指定被注入的
+		bean的id。
+	 -->
+	<bean id="cup" class="ioc.byset.Cup">
+		<property name="drop" ref="drop"/>
+		<property name="milk" ref="milk"/>
+	</bean>
+	
+	<!-- 构造器注入 -->
+	<!-- 
+		constructor-arg:容器会采用构造器来建立
+		依赖关系。其中，index指定参数的下标。
+	 -->
+	<bean id="power" class="ioc.byconstructor.Power"/>
+	<bean id="body" class="ioc.byconstructor.Body">
+		<constructor-arg index="0" ref="power"/>
+	</bean>
+
+</beans>

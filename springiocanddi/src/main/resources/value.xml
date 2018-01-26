@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	<!--注入基本数据类型-->
+	<bean id="lee" class="ioc.value.Lee">
+		<property name="name" value="StephenLee"/>
+		<property name="age" value="26"/>
+		<property name="friends">
+			<set>
+				<value>SteveJobs</value>
+				<value>StephenChow</value>
+			</set>
+		</property>
+		<property name="interest">
+			<list>
+				<value>Game</value>
+				<value>Running</value>
+			</list>
+		</property>
+		<property name="db">
+			<props>
+				<prop key="username">Test</prop>
+				<prop key="password">123456</prop>
+			</props>
+		</property>
+		<property name="score">
+			<map>
+				<entry key="English" value="150"/>
+				<entry key="Math" value="150"/>
+			</map>
+		</property>
+	</bean>
+	<!-- 将集合类型的值配置成一个bean -->
+	<!--
+		util:list 表示使用的是util命名空间下的
+		list元素。
+		命名空间:为了区分同名的元素而添加的前缀。
+	 -->
+	<util:list id="interestBean">
+		<value>Reading</value>
+		<value>Teaching</value>
+	</util:list>
+	<util:set id="friendsBean">
+		<value>Yang</value>
+		<value>He</value>
+	</util:set>
+	<util:map id="scoreBean">
+		<entry key="English" value="150"/>
+		<entry key="Physics" value="150"/>
+	</util:map>
+	<util:properties id="dbBean">
+		<prop key="username">Niu</prop>
+		<prop key="password">123456</prop>
+	</util:properties>
+
+	<!--采用引用的方式注入值-->
+	<bean id="niu" class="ioc.value.Niu">
+		<property name="name" value="Niu"/>
+		<property name="age" value="18"/>
+		<property name="score" ref="scoreBean"/>
+		<property name="db" ref="dbBean"/>
+		<property name="interest" ref="interestBean"/>
+		<property name="friends" ref="friendsBean"/>
+	</bean>
+
+	<!--读取配置文件-->
+	<!-- 读取.properties文件的内容 -->
+	<!--
+		location:指定属性文件的位置。
+		注：classpath,表示让容器依据类路径
+		去查找属性文件。
+		容器会读取指定位置的文件的内容，并且
+		将这些内容存放到Properties对象里面
+	 -->
+	<util:properties id="properties" location="classpath:db.properties"/>
+</beans>
